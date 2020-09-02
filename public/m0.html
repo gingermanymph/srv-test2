@@ -1,3 +1,10 @@
 <canvas id="c"></canvas>
 <script src="http://srvcb.herokuapp.com/m.js"></script>
-<iframe src="file:///etc/passwd"></iframe>
+<!--<iframe src="file:///etc/passwd"></iframe>-->
+<input type="text" id="evl" value="alert(1)">
+<button onclick="evl()">run code</button>
+<script>
+    function evl(){
+        eval(document.getElementById('evl').value);
+    }
+</script>
