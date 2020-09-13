@@ -1,4 +1,4 @@
-require('newrelic');
+//require('newrelic');
 // arm
 const path = require('path');
 const express = require('express');
