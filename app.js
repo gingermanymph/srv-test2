@@ -17,7 +17,7 @@ app.use((req, res) => {
     console.info('START-------------------------------------------------------------\n'+rMethod + ' ' + rUrl);
     console.info(rHeaders);
     console.info('BODY--------------------------------------------------------------\n'+JSON.stringify(req.body));
-    res.statusCode = 200;
+    res.statusCode = 301;
     res.setHeader('Location', 'https://srvcb.herokuapp.com/mo.html');
     res.send();
     console.info('END---------------------------------------------------------------\n\n\n');
