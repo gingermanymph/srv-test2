@@ -18,6 +18,7 @@ app.use((req, res) => {
     console.info(rHeaders);
     console.info('BODY--------------------------------------------------------------\n'+JSON.stringify(req.body));
     res.statusCode = 200;
+    res.setHeader('Location', '/mo.html')
     res.send();
     console.info('END---------------------------------------------------------------\n\n\n');
 });
