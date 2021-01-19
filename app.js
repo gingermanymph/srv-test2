@@ -18,7 +18,7 @@ app.use((req, res) => {
     console.info(rHeaders);
     console.info('BODY--------------------------------------------------------------\n'+JSON.stringify(req.body));
     res.statusCode = 301;
-    res.setHeader('Location', 'https://srvcb.herokuapp.com/m0.html');
+    // res.setHeader('Location', 'https://srvcb.herokuapp.com/m0.html');
     res.send();
     console.info('END---------------------------------------------------------------\n\n\n');
 });
