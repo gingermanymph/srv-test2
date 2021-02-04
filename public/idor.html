@@ -8,7 +8,8 @@
 <body>
   
 <script>
-var idcomments_acct = 'e810de4766a9bd4489e627508e17bfea';
+const idcomments_acct_def = 'e810de4766a9bd4489e627508e17bfea';
+var idcomments_acct = (location.search.indexOf('id') == 1) ? location.search.split('?id=')[1] : idcomments_acct_def;
 var idcomments_post_id;
 var idcomments_post_url;
 </script>
