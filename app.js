@@ -10,6 +10,16 @@ const PORT = process.env.PORT || 808;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Redirect via Location header
+// /r?r=file:///etc/passwd
+app.use('/r', (req, res, next) =>{
+    param = req.query['r']
+    console.log(req.query);
+    res.setHeader('Location', param)
+    res.statusCode= 301;
+    next();
+});
+
 app.use((req, res) => {
     const rMethod = req.method;
     const rUrl = req.url;
