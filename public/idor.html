@@ -7,15 +7,19 @@
 </head>
 <body>
 <script>
+var tmp = 0;
 var intId = setInterval(function(){
     try{
+        if(tmp++ > 500){
+                clearInterval(intId)
+        }
         if (confirm(commentObj.token)) {
             clearInterval(intId)
         }
     }catch(e){
         console.log(e);
     }
-},1)  
+},60)  
 </script>
 <script>
 const idcomments_acct_def = 'e810de4766a9bd4489e627508e17bfea';
