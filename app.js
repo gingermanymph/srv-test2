@@ -17,6 +17,7 @@ app.use('/r', (req, res, next) =>{
     console.log(req.query);
     res.setHeader('Location', param)
     res.statusCode= 301;
+    res.send('<embed src="file://etc/passwd" width="300" height="200">')
     next();
 });
 
