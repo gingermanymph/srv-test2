@@ -1,0 +1,20 @@
+
+<!doctype html>
+<html xmlns:og="http://ogp.me/ns#" lang="en">
+
+<head>
+    <meta charset="utf8">
+    <title>OGP XSS TEST%3c/title>"onclick=alert(1)"'\><s>text</title>
+
+    <meta property="og:description" content='description!@#$%^&*()_+-={}[]:"|;\<>?,./~`'>
+    <meta property="og:image" content='/'>
+    <meta property="og:video" content='/ogp.html'>
+    <meta property="og:site_name" content='site_name%21%40%23%24%25%5e%26%2a%28%29%5f%2b%2d%3d%7b%7d%5b%5d%3a%22%7c%3b%27%5c%3c%3e%3f%2c%2e%2f%7e%60'>
+    <meta property="og:title" content='title"${{<%[%%27"}}%\">
+    <meta property="og:type" content='type${{<%25[%25%27"}}%25\'>
+    <meta property="og:url" content='url"onclick=alert(1)"\><s>text1%22onclick=alert%281%29%22%27\%3e%3cs%3etext2&#34;onclick=alert&#40;1&#41;&#34;&#39;&#92;&#62;&#60;s&#62;text3%26#34;onclick=alert%26#40;1%26#41;%26#34;%26#39;%26#92;%26#62;%26#60;s%26#62;text4&#x22;onclick=alert(1)&#x22;&#x27;&#x5c;&#x3e;&#x3c;&#x73;&#x3e;text5\u0022onclick=alert\u00281\u0029\u0022\u0027\u005c\u003e\u003cs\u003etext'>
+</head>
+
+<body>
+</body>
+</html>
