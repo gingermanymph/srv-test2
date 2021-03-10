@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //     //next();
 // });
 
-let temp = '/';
+let temp = '//127.0.0.1';
 
 app.get('/ssrf', (req, res, next) =>{
     res.setHeader('Location', temp)
