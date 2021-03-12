@@ -30,6 +30,12 @@ app.get('/ssrf', (req, res, next) =>{
     res.statusCode= 301;
     res.send()
 });
+// short variant
+app.get('/s', (req, res, next) =>{
+    res.setHeader('Location', temp)
+    res.statusCode= 301;
+    res.send()
+});
 
 app.post('/ssrf', (req, res, next) =>{
     temp = req.body.data || '/';
