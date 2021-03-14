@@ -12,17 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Redirect via Location header
-// /r?r=file:///etc/passwd
-// app.get('/r', (req, res, next) =>{
-//     param = req.query['r']
-//     console.log(req.query);
-//     res.setHeader('Location', param)
-//     res.statusCode= 301;
-//     res.send('<embed src="file://etc/passwd" width="300" height="200">')
-//     //next();
-// });
-
 let temp = '//127.0.0.1';
 
 app.get('/ssrf', (req, res, next) =>{
@@ -34,12 +23,14 @@ app.get('/ssrf', (req, res, next) =>{
 app.get('/s', (req, res, next) =>{
     res.setHeader('Location', temp)
     res.statusCode= 301;
-    res.send()
+    console.log(req.headers);
+    console.log(JSON.stringify(req.body));
+    res.send();
 });
 app.post('/s', (req, res, next) =>{
     res.setHeader('Location', temp)
     res.statusCode= 301;
-    res.send()
+    res.send();
 });
 
 app.post('/ssrf', (req, res, next) =>{
