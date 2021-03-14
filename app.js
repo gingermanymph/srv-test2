@@ -34,6 +34,12 @@ app.post('/ssrf', (req, res, next) =>{
     res.send(`Saved ${temp}`)
 });
 
+// rout witout response
+app.use('/noresponse', (req, res) =>{
+    console.log(req.headers)
+    console.log(JSON.stringify(req.body))
+});
+
 app.use((req, res) => {
     const rMethod = req.method;
     const rUrl = req.url;
