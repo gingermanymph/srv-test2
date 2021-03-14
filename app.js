@@ -21,17 +21,12 @@ app.get('/ssrf', (req, res, next) =>{
 });
 // short variant
 app.use('/s', (req, res, next) =>{
-    res.setHeader('Location', temp)
-    res.statusCode= 301;
     console.log(req.headers);
     console.log(JSON.stringify(req.body));
+    res.setHeader('Location', temp)
+    res.statusCode= 301;
     res.send();
 });
-// app.post('/s', (req, res, next) =>{
-//     res.setHeader('Location', temp)
-//     res.statusCode= 301;
-//     res.send();
-// });
 
 app.post('/ssrf', (req, res, next) =>{
     temp = req.body.data || '/';
