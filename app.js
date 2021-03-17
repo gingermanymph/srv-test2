@@ -25,7 +25,7 @@ app.use('/s', (req, res, next) =>{
     console.log(JSON.stringify(req.body));
     res.setHeader('Location', temp)
     res.statusCode= 301;
-    res.send();
+    res.send('Hello world! OK.');
 });
 
 app.post('/ssrf', (req, res, next) =>{
