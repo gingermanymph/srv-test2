@@ -4,8 +4,12 @@
 <body>
   <script>
 	function getLocation(){
-		l=location;if(l.search){a=l.search.split('?')[1].split('=');h=a[0];p=a[1]};
-		return `http://${h}:${p}`;
+		try{
+			l=location;if(l.search){a=l.search.split('?')[1].split('=');h=a[0];p=a[1]};
+			return `http://${h}:${p}`;
+		} catch (e) {
+		console.log(e)
+		}
 	}
 
 	f=document.createElement('iframe');
