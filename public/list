@@ -35,9 +35,9 @@ http://localhost#ssrf-server.tumblr.net
 http://ssrf-server.tumblr.net.localhost
 http://localhost/ssrf-server.tumblr.net
 http://localhost/?d=ssrf-server.tumblr.net
-http://127.0.0.1%00ssrf-server.tumblr.net
 http://127.0.0.1?ssrf-server.tumblr.net
 http://127.0.0.1///ssrf-server.tumblr.net
-https://127.0.0.1%00ssrf-server.tumblr.net
 https://127.0.0.1?ssrf-server.tumblr.net
 https://127.0.0.1///ssrf-server.tumblr.net
+http://127.0.0.1%00ssrf-server.tumblr.net
+https://127.0.0.1%00ssrf-server.tumblr.net
