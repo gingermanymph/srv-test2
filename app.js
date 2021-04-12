@@ -46,7 +46,7 @@ app.use('/noresponse', (req, res) =>{
 // s - svg onload redirect
 // i - no response image for delay
 app.use('/rhtml/:uid', (req, res) =>{
-	let tmp = '<html><head></head><body><script></script><svg><img></body></html>';
+	let tmp = '<html><head></head><body>Hello World!<script></script><svg><img></body></html>';
 	const uid = req.params.uid;
 	let host = uid.split(':')[0];
 	let port = parseInt(uid.split(':')[1],10);
