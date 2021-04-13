@@ -56,7 +56,7 @@ function abort(res){
  
 
 // Get a list with urls
-var url = srvcb+'/list';
+var url = srvcb+'/list?' + new Date().getTime();
 var xhr = createCORSRequest('GET', url);
 xhr.onload=load;
 xhr.onerror=error;
