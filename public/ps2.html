@@ -72,7 +72,7 @@ list.forEach(u=>{
     var xhr = createCORSRequest('GET', u);
     xhr.onload=load;
     xhr.onerror=error;
-    //xhr.onabort=abort;
+    xhr.onabort=abort;
     xhr.send();
 });
 }
