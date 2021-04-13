@@ -13,10 +13,6 @@ http://[::]:80
 http://[::]:25
 http://[::]:22
 http://[::]:3128
-http://0000::1:80
-http://0000::1:25
-http://0000::1:22
-http://0000::1:3128
 http://spoofed.burpcollaborator.net
 http://localtest.me
 http://srcb.fun.127.0.0.1.nip.io
