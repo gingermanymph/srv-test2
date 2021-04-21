@@ -98,12 +98,3 @@ http://127.0.0.1:2379/v2/keys/?recursive=true
 http://127.0.0.1:2375/v1.24/containers/json
 file:///etc/passwd
 file://\/\/etc/passwd
-http://0000::1:80
-http://0000::1:25
-http://0000::1:22
-http://0000::1:3128
-http://localhost:+11211aaa
-http://localhost:00011211aaaa
-http://7147006462/
-http://425.510.425.510/
-http://0x41414141A9FEA9FE/
