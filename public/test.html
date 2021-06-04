@@ -61,6 +61,7 @@ function setUp(){
     document.body.onresize = getSize;
 
 	var i = setInterval(()=>{
+		openFullscreen();
 setControls();
 clearInterval(i);
 }, 2000)
@@ -209,6 +210,16 @@ function draw(){
 //     ctx.lineTo(width + 10 - step, height / (settings.maxDepth / settings.depth));
     
     ctx.stroke();
+}
+	
+function openFullscreen() {
+  if (canvas.requestFullscreen) {
+    canvas.requestFullscreen();
+  } else if (canvas.webkitRequestFullscreen) { /* Safari */
+    canvas.webkitRequestFullscreen();
+  } else if (canvas.msRequestFullscreen) { /* IE11 */
+    canvas.msRequestFullscreen();
+  }
 }
 
 setUp();
