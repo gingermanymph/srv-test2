@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DepthSonar</title>
+    <!-- <script type="text/javascript" src="dat.gui.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+</head>
+<body style="padding: 0;margin: 0;">
+    
+<script>
+//https://codepen.io/andre13/pen/irkjb?editors=1010
+var data = [];
+var canvas;
+var canvasBuffer;//s = [];
+var ctx;
+var width;
+var height;
+var depth; // meters
+var gui;
+var settings = {};
+var int;
+var step = 25;
+var oldPoint = {x:null, y:null};
+var newPoint = {x:null, y:null};
+var point = {
+    mX:50,
+    mY:50,
+    lX:50,
+    lY:50
+}
+
+function getSize(){
+    width = canvas.width = innerWidth;
+    height = canvas.height = innerHeight;
+}
+
+function setUp(){
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js';
+    document.body.appendChild(script);
+
+    canvas = document.createElement('canvas');
+    canvasBuffer = document.createElement('canvas');
+//     canvasBuffers.push(document.createElement('canvas').getContext('2d'));
+//     canvasBuffers.push(document.createElement('canvas').getContext('2d'));
+    canvas.id = 'cv';
+    canvas.width = innerWidth; // /*canvasBuffers[0].width = canvasBuffers[1].width =*/ '768';
+    canvas.height = innerHeight; /*canvasBuffers[0].height = canvasBuffers[1].height =*/ '340';
+
+    document.body.appendChild(canvas);
+    document.body.style = 'padding: 0;margin: 0;';
+    document.body.onresize = 'getSize()';
+
+    ctx = canvas.getContext('2d');
+    ctxBuffer = canvasBuffer.getContext('2d');
+    width = ctxBuffer.width = canvas.width;
+    height = ctxBuffer.height = canvas.height;
+
+    document.body.onresize = getSize;
+
+	var i = setInterval(()=>{
+setControls();
+clearInterval(i);
+}, 2000)
+}
+
+function setControls(){
+    gui = new dat.GUI();
+    settings.scale = 200;
+    settings.depth = 2.5;
+    settings.maxDepth = 5;
+    settings.rows = 4;
+    settings.columns = 3;
+    settings.lineWidth = 1;
+    settings.tableWidth = .3;
+
+    settings.lineColor = {
+        h: 20,
+        s: 100,
+        l: 50
+    }
+
+    settings.tableColor = {
+        h: 200,
+        s: 50,
+        l: 50
+    }
+
+    settings.bgColor = {
+        h: 200,
+        s: 0,
+        l: 0
+    }
+
+    var settingsFolder = gui.addFolder('Settings');
+    settingsFolder.add(settings, 'scale', 0, 1000);
+    settingsFolder.add(settings, 'depth', .2, 10);
+    settingsFolder.add(settings, 'maxDepth', 1, 20);
+    settingsFolder.add(settings, 'rows', 0, 20);
+    settingsFolder.add(settings, 'columns', 0, 10);
+    settingsFolder.add(settings, 'lineWidth', 0, 20);
+    settingsFolder.add(settings, 'tableWidth', 0, 1);
+    settingsFolder.open();
+
+    var lineColorsFolder = gui.addFolder('Line color');
+    lineColorsFolder.add(settings.lineColor, 'h', 0, 255);
+    lineColorsFolder.add(settings.lineColor, 's', 0, 100);
+    lineColorsFolder.add(settings.lineColor, 'l', 0, 100);
+
+    var tableColorsFolder = gui.addFolder('Table color');
+    tableColorsFolder.add(settings.tableColor, 'h', 0, 255);
+    tableColorsFolder.add(settings.tableColor, 's', 0, 100);
+    tableColorsFolder.add(settings.tableColor, 'l', 0, 100);
+
+    var bgColorsFolder = gui.addFolder('Background color');
+    bgColorsFolder.add(settings.bgColor, 'h', 0, 255);
+    bgColorsFolder.add(settings.bgColor, 's', 0, 100);
+    bgColorsFolder.add(settings.bgColor, 'l', 0, 100);
+    
+
+    int = setInterval(function(){
+    requestAnimationFrame(draw);
+    if (data.length > settings.scale){
+        data.splice(0, 1)
+    } else {
+       // data.splice(0, 1)
+    }
+    data.push(settings.depth + Math.random()* 0.02);
+    }, 100);
+}
+
+function draw(){
+//     requestAnimationFrame(draw);
+
+//     ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = `hsl(${settings.bgColor.h}, ${settings.bgColor.s}%, ${settings.bgColor.l}%)`;
+//     var my_gradient = ctx.createLinearGradient(0, 0, 0, height);
+//     my_gradient.addColorStop(1, "darkblue");
+//     my_gradient.addColorStop(0, "white");
+//     ctx.fillStyle = my_gradient;
+    ctx.fillRect(0,0, width, height);
+
+    settings.maxDepth = settings.depth > settings.maxDepth - .5 ? settings.depth + .5 : settings.maxDepth;
+    // ?? Do we need it ??
+    settings.maxDepth = settings.depth < settings.maxDepth - 3 ? settings.maxDepth - 2.5 : settings.maxDepth;
+
+
+    ctx.beginPath();
+    ctx.lineWidth = settings.tableWidth;
+    ctx.strokeStyle = `hsl(${settings.tableColor.h}, ${settings.tableColor.s}%, ${settings.tableColor.l}%)`;
+
+    // horizontal lines
+    var c = height / settings.rows;
+    var counter = height;
+    depth = settings.maxDepth;
+    var dec = depth / settings.rows
+
+    ctx.fillStyle = 'white'
+    ctx.font = "9px serif";
+    while(counter > 0){
+        ctx.fillText(depth.toFixed(2), width - 25, counter - 5);
+        ctx.moveTo(0, counter - .5);
+        ctx.lineTo(width, counter - .5);
+        counter -= c;
+        depth -= dec;
+    }
+
+    // vertical lines
+    var c = width / settings.columns;
+    var counter = width;
+
+    while(counter > 0){
+        ctx.moveTo(counter - .5, 0);
+        ctx.lineTo(counter - .5, height);
+        counter -= c;
+    }
+
+    ctx.stroke();
+
+// ----------------------------
+    var largest = 0;  
+    for( var i = 0; i < data.length; i++ ){  
+        if( data[ i ] > largest ){  
+            largest = data[ i ];  
+        }  
+    }  
+
+    // draw some line
+    //height / (settings.maxDepth / settings.depth)
+    ctx.beginPath();
+    ctx.lineJoin = "round";  
+    ctx.lineWidth = settings.lineWidth;
+//     ctx.strokeStyle = `hsl(${settings.lineColor.h}, ${settings.lineColor.s}%, ${settings.lineColor.l}%)`;
+    var my_gradient = ctx.createLinearGradient(0, 0, 0, height);
+    my_gradient.addColorStop(1, "darkblue");
+    my_gradient.addColorStop(0, "white");
+    ctx.strokeStyle = my_gradient;
+    ctx.moveTo(0, height / (settings.maxDepth / data[0]));
+    for(var i = 1; i < data.length; i++){
+        ctx.lineTo(width / data.length * i, height / (settings.maxDepth / data[i]));
+    }
+
+//     worked
+//     ctx.moveTo(0, height / (settings.maxDepth / settings.depth));
+//     ctx.lineTo(width, height / (settings.maxDepth / settings.depth))
+//     ??
+//     ctx.lineTo(width + 10 - step, height / (settings.maxDepth / settings.depth));
+    
+    ctx.stroke();
+}
+
+setUp();
+</script> 
+</body>
+</html>
