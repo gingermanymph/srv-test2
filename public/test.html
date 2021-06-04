@@ -48,6 +48,7 @@ function setUp(){
     canvas.id = 'cv';
     canvas.width = innerWidth; // /*canvasBuffers[0].width = canvasBuffers[1].width =*/ '768';
     canvas.height = innerHeight; /*canvasBuffers[0].height = canvasBuffers[1].height =*/ '340';
+	canvas.onclick = openFullscreen;
 
     document.body.appendChild(canvas);
     document.body.style = 'padding: 0;margin: 0;';
@@ -61,7 +62,6 @@ function setUp(){
     document.body.onresize = getSize;
 
 	var i = setInterval(()=>{
-		openFullscreen();
 setControls();
 clearInterval(i);
 }, 2000)
