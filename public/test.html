@@ -34,6 +34,13 @@ function getSize(){
     width = canvas.width = innerWidth;
     height = canvas.height = innerHeight;
 }
+	
+function getImage(){
+	var canvas = document.getElementById("cv");
+	var dataURL = canvas.toDataURL("image/png");
+	var newTab = window.open('about:blank','image from canvas');
+	newTab.document.write("<img src='" + dataURL + "' alt='DepthSonar'/>");
+}
 
 function setUp(){
     var script = document.createElement('script');
@@ -48,6 +55,7 @@ function setUp(){
     canvas.width = innerWidth; // /*canvasBuffers[0].width = canvasBuffers[1].width =*/ '768';
     canvas.height = innerHeight; /*canvasBuffers[0].height = canvasBuffers[1].height =*/ '340';
 	canvas.onclick = openFullscreen;
+	canvas.ondblclick = getImage;
 
     document.body.appendChild(canvas);
     document.body.style = 'padding: 0;margin: 0;';
