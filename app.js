@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-let temp = '//127.0.0.1';
+let temp = '/avatar.svg?//127.0.0.1';
 
 app.get('/ssrf', (req, res, next) =>{
     res.setHeader('Location', temp)
